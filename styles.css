@@ -1232,6 +1232,7 @@ a.prototype-link {
   width: 150px;
   height: 44px;
   cursor: pointer;
+  text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -1473,13 +1474,16 @@ a.prototype-link {
 
 @media (max-width: 720px) {
   .node-4 {
-    min-height: 84px;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
     padding: 10px 16px;
+    gap: 12px;
   }
 
   .button-ir-al-inicio-5 {
     min-width: 0;
-    flex: 1;
+    flex: 0 0 auto;
   }
 
   .text-6 {
@@ -1493,16 +1497,33 @@ a.prototype-link {
   }
 
   .node-10 {
+    width: 100%;
     flex: 0 0 auto;
   }
 
   .navigation-secciones-11 {
-    width: auto;
+    width: 100%;
+    justify-content: stretch;
+    gap: 8px;
   }
 
   .button-12,
   .button-14 {
-    display: none;
+    flex: 1 1 0;
+    min-width: 0;
+    height: 44px;
+  }
+
+  .text-13,
+  .text-15 {
+    font-size: 12px;
+    text-transform: none;
+    white-space: nowrap;
+  }
+
+  .button-buscar-16,
+  .button-abrir-carrito-19 {
+    flex: 0 0 38px;
   }
 
   .section-23 {
@@ -1619,47 +1640,87 @@ a.prototype-link {
 
 .hero-banner {
   position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
   width: 100%;
-  line-height: 0;
+  min-height: clamp(380px, 39.4vw, 567px);
+  padding: clamp(40px, 7vw, 96px);
+  overflow: hidden;
+  background-color: #12131d;
+}
+
+.hero-banner::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 11, 29, 0.78), rgba(8, 11, 29, 0.3));
+  content: "";
 }
 
 .hero-banner .section-23 {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   padding: 0;
-  object-fit: initial;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 800px);
+  color: #fff;
+}
+
+.hero-title {
+  max-width: 720px;
+  font-family: var(--font-family-lato);
+  font-size: clamp(36px, 4.2vw, 58px);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.hero-description {
+  max-width: 620px;
+  margin-top: 18px;
+  font-family: var(--font-family-inter);
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.5;
 }
 
 .hero-cta {
-  position: absolute;
-  top: 75.5%;
   display: flex;
-  width: 22.22%;
-  height: 11.64%;
-  min-height: 40px;
+  min-height: 52px;
   align-items: center;
   justify-content: center;
-  border-radius: 18px;
-  font-family: var(--font-family-lato);
-  font-size: clamp(10px, 1.11vw, 16px);
+  padding: 0 24px;
+  border-radius: 14px;
+  font-family: var(--font-family-inter);
+  font-size: 15px;
   font-weight: 700;
   line-height: 1;
-  text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
-  transform: translateY(-50%);
   transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
 .hero-cta-primary {
-  left: 24.44%;
   color: #fff;
   background-color: #211d68;
 }
 
 .hero-cta-secondary {
-  left: 53.33%;
   color: #38383d;
   background-color: #f7f7f7;
 }
@@ -1674,7 +1735,7 @@ a.prototype-link {
 
 .hero-cta:hover {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
-  transform: translateY(-55%);
+  transform: translateY(-2px);
 }
 
 .hero-cta:focus-visible {
@@ -1683,17 +1744,48 @@ a.prototype-link {
 }
 
 @media (max-width: 720px) {
+  .hero-banner {
+    justify-content: center;
+    min-height: 420px;
+    padding: 40px 20px;
+  }
+
+  .hero-banner::before {
+    background: linear-gradient(0deg, rgba(8, 11, 29, 0.76), rgba(8, 11, 29, 0.48));
+  }
+
+  .hero-banner .section-23 {
+    object-position: center;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-title {
+    margin: 0 auto;
+    font-size: clamp(28px, 8vw, 38px);
+    line-height: 1.12;
+  }
+
+  .hero-description {
+    margin: 14px auto 0;
+    font-size: 16px;
+  }
+
+  .hero-actions {
+    display: grid;
+    width: 100%;
+    max-width: 460px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 24px auto 0;
+  }
+
   .hero-cta {
-    width: 42%;
-    min-height: 44px;
-    font-size: 12px;
-  }
-
-  .hero-cta-primary {
-    left: 5%;
-  }
-
-  .hero-cta-secondary {
-    left: 53%;
+    min-height: 50px;
+    padding: 0 10px;
+    border-radius: 12px;
+    font-size: clamp(11px, 3.4vw, 14px);
   }
 }
